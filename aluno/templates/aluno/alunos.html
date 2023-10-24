@@ -1,39 +1,92 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block center %}
+<h2>Lista de Alunos</h2>
 
-{% block center %}
-    <h2> Lista de Alunos</h2>
+<form action="{% url 'aluno_listar' %}" method="get">
+  <div>
+    <label
+      for="nome"
+      class="text-secondary"
+      style="margin-top: 5px; margin-left: 10px"
+      >Nome</label
+    >
+    <input
+      placeholder="Nome"
+      type="text"
+      name="nome"
+      class="form-control"
+      value=""
+    />
+    <br />
+    <label
+      for="curso"
+      class="text-secondary"
+      style="margin-top: 5px; margin-left: 10px"
+      >Curso</label
+    >
+    <input
+      placeholder="curso"
+      type="text"
+      name="curso"
+      class="form-control"
+      value=""
+    />
+    <br />
+    <label
+      for="cidade"
+      class="text-secondary"
+      style="margin-top: 5px; margin-left: 10px"
+      >Cidade</label
+    >
+    <input
+      placeholder="cidade"
+      type="text"
+      name="cidade"
+      class="form-control"
+      value=""
+    />
+    <br />
+    <button type="submit" class="btn btn-primary ms-3">Enviar</button>
+    <br />
+    <br />
+  </div>
+</form>
 
-    <a href="{% url 'aluno_criar' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+<a href="{% url 'aluno_criar' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email</th>
-            <th>Cidade</th>
-            <th>Curso</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for obj in alunos %}
-            <tr>
-                <td>{{ obj.nome_aluno }}</td>
-                <td>{{ obj.data_nascimento }}</td>
-                <td>{{ obj.email }}</td>
-                <td>{{ obj.cidade.nome }}</td>
-                <td>{{ obj.curso.nome }}</td>
-                <td>
-                    <a href="{% url 'aluno_editar' id=obj.id %}" class="btn btn-primary btn-sm">Editar</a>
-                    <a href="{% url 'aluno_remover' id=obj.id %}" class="btn btn-danger btn-sm">Remover</a>
-                </td>
-            </tr>
-        {% endfor %}
-
-
-        </tbody>
-    </table>
-
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th>Email</th>
+      <th>Cidade</th>
+      <th>Curso</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in alunos %}
+    <tr>
+      <td>{{ obj.nome_aluno }}</td>
+      <td>{{ obj.data_nascimento }}</td>
+      <td>{{ obj.email }}</td>
+      <td>{{ obj.cidade.nome }}</td>
+      <td>{{ obj.curso.nome }}</td>
+      <td>
+        <a
+          href="{% url 'aluno_editar' id=obj.id %}"
+          class="btn btn-primary btn-sm"
+          >Editar</a
+        >
+        <a
+          href="{% url 'aluno_remover' id=obj.id %}"
+          class="btn btn-danger btn-sm"
+          >Remover</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}
